@@ -1,0 +1,46 @@
+name: tailscaled
+services:
+  tailscaled:
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    environment:
+      TS_EXTRA_ARGS: --advertise-exit-node
+      TS_ROUTES: 192.168.100.0/24
+      TS_STATE_DIR: /var/lib/tailscale
+      TS_HOSTNAME: ZimaOS-1
+    image: tailscale/tailscale:latest
+    container_name: tailscaled
+    deploy:
+      resources:
+        reservations:
+          memory: "32M"
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /dev/net/tun
+        target: /dev/net/tun
+      - type: bind
+        source: /DATA/AppData/tailscaled/config
+        target: /var/lib/tailscale
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  author: Cp0204
+  category: VPN
+  description:
+    en_us: Tailscale is a zero config VPN for building secure networks. Install on any device in minutes. Remote access from any network or physical location.
+  developer: tailscale
+  icon: https://raw.githubusercontent.com/tylerdh12/ZimaOS-AppStore/refs/heads/main/Apps/Tailscaled/icon.png
+  main: tailscaled
+  tagline:
+    en_us: A VPN Service for Secure Networks.
+  thumbnail:
+  tips:
+    before_install:
+      en_us: After installation, view the authentication url in the `App Settings-Logs`.
+  title:
+    en_us: Tailscaled

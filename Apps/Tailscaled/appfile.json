@@ -1,0 +1,104 @@
+{
+	"version": "latest",
+	"title": "Tailscaled",
+	"name": "transmission",
+	"icon": "https://raw.githubusercontent.com/tylerdh12/ZimaOS-AppStore/refs/heads/main/Apps/Tailscaled/icon.png",
+	"tagline": "A VPN Service for Secure Networks",
+	"overview": "Tailscale is a zero config VPN for building secure networks. Install on any device in minutes. Remote access from any network or physical location.",
+	"thumbnail": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/thumbnail.png",
+	"screenshots": [],
+	"category": [
+		"VPN"
+	],
+	"developer": {
+		"name": "Tailscale",
+		"website": "https://tailscale.com/",
+		"donate_text": "",
+		"donate_link": ""
+	},
+	"adaptor": {
+		"name": "Tyler Harper",
+		"website": "https://tylerharper.dev/",
+		"donate_text": "",
+		"donate_link": ""
+	},
+	"support": "https://tylerharper.dev/",
+	"website": "https://tylerharper.dev/",
+	"container": {
+		"image": "tailscale/tailscale:latest",
+		"shell": "sh",
+		"privileged": false,
+		"network_model": "host",
+		"health_check": "",
+		"envs": [
+			{
+				"key": "TS_EXTRA_ARGS",
+				"value": "--advertise-exit-node",
+				"description": "",
+				"configurable": "yes"
+			},
+			{
+				"key": "TS_HOSTNAME",
+				"value": "ZimaCube",
+				"description": "",
+				"configurable": "yes"
+			},
+			{
+				"key": "TS_ROUTES",
+				"value": "192.168.100.0/24",
+				"description": "",
+				"configurable": "no"
+			},
+			{
+				"key": "TS_STATE_DIR",
+				"value": "/var/lib/tailscale",
+				"description": "",
+				"configurable": "no"
+			}
+		],
+		"volumes": [
+			{
+				"container": "/dev/net/tun",
+				"host": "/dev/net/tun",
+				"mode": "rw",
+				"allocation": "automatic",
+				"configurable": "no",
+				"description": ""
+			},
+			{
+				"container": "/var/lib/tailscale",
+				"host": "/DATA/AppData/$AppID/config",
+				"mode": "rw",
+				"allocation": "automatic",
+				"configurable": "no",
+				"description": ""
+			}
+		],
+		"devices": [],
+		"constraints": {
+			"min_memory": 32,
+			"min_storage": 128
+		},
+		"restart_policy": "unless-stopped",
+		"sysctls": [],
+		"cap_add": [],
+		"labels": [],
+		"host_name": "",
+		"cmd": []
+	},
+	"abilities": {
+		"notification": false,
+		"widgets": false,
+		"authentication": false,
+		"search": false,
+		"upnp": true
+	},
+	"tips": {
+		"before_install": []
+	},
+	"changelog": {
+		"latest_updates": "",
+		"url": ""
+	},
+	"latest_update_date": ""
+}
